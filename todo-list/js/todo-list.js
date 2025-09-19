@@ -12,15 +12,19 @@ let idIndex = 3;
 /**
  * data 기준으로 todo-item 출력
  */
-const printData = (data) => {
+const printData = () => {
   // 기존 todo-item 들 삭제
   let todos = document.querySelector(".todos-wrapper");
   [...todos.children].forEach((item) => {
     if (item.matches(".todo-item")) item.remove();
   });
 
+  // 검색어 기준으로 필터링
+  let filter = document.querySelector(".list input").value.trim();
+  let filterList = mockData.filter((data) => data.content.includes(filter));
+
   // mockData 기준으로 다시 todo-item 생성
-  data.forEach((item, index) => {
+  filterList.forEach((item, index) => {
     let todo = document.createElement("div");
     let date = `${item.date.getFullYear()}.${item.date.getMonth()}.${item.date.getDate()} ${item.date.getHours()}:${item.date.getMinutes()}:${item.date.getSeconds()}`;
 
@@ -68,12 +72,7 @@ document.body.addEventListener("click", (e) => {
 /**
  * 검색
  */
-document.querySelector(".list input").addEventListener("keyup", (e) => {
-  let filterList = mockData.filter((data) =>
-    data.content.includes(e.target.value.trim())
-  );
-  printData(filterList);
-});
+document.querySelector(".list input").addEventListener("input", printData);
 
 // todo-list 출력
 printData(mockData);
