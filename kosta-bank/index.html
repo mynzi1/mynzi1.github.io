@@ -81,7 +81,7 @@
     </footer>
 
     <script>
-      // banner의 text 주기적으로 변경 (5초)
+      // banner의 text 주기적으로 변경
       let bannerList = [
         "국민의 은행이 되겠습니다.",
         "5060 웰컴패키지, 최대 7만원 혜택을 드립니다.",
@@ -93,16 +93,7 @@
       setInterval(() => {
         document.getElementById("banner").innerText = bannerList[index++];
         index %= bannerList.length;
-      }, 1000);
-
-      // setTimeout 재귀 호출
-      let bannerEvent = function () {
-        document.getElementById("banner").innerText = bannerList[index++];
-        index %= bannerList.length;
-
-        setTimeout(bannerEvent, 1000);
-      };
-      bannerEvent(); // 함수 호출
+      }, 2000);
 
       // button 클릭 시 data-main-item-id 의 값 출력
       document.querySelectorAll("section button").forEach((btnEle) => {
